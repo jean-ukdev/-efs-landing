@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>English for Success — Learn English. Build Your Future.</title>
+<meta name="description" content="Um professor de inteligência artificial 24h focado em carreira, imigração e negócios. O inglês que abre portas no mundo real, para brasileiros que querem crescer." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0E16; --ink-1:#0D121C; --panel:#131B28; --panel-2:#1A2434;
+    --line:rgba(255,255,255,.09); --line-2:rgba(255,255,255,.15);
+    --text:#EAEEF5; --muted:#94A1B6; --faint:#5C6981;
+    --accent:#FF7A18; --accent-d:#E85F00; --glow:rgba(255,122,24,.16);
+    --gold:#E7B24E; --paper:#F6F8F5;
+    --r:18px; --r-sm:12px; --maxw:1140px;
+    --d-font:'Space Grotesk',sans-serif; --b-font:'Inter',sans-serif; --m-font:'Space Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink); color:var(--text); font-family:var(--b-font);
+    font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px}
+  .eyebrow{
+    font-family:var(--m-font); font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--accent); display:inline-flex; align-items:center; gap:9px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--accent); display:inline-block}
+  .eyebrow.muted{color:var(--faint)} .eyebrow.muted::before{background:var(--faint)}
+  h1,h2,h3{font-family:var(--d-font); font-weight:700; letter-spacing:-.025em; line-height:1.05}
+  .lead{color:var(--muted); font-size:clamp(1.02rem,1.6vw,1.2rem)}
+  .mono{font-family:var(--m-font)}
+
+  /* buttons */
+  .btn{display:inline-flex; align-items:center; gap:9px; font-family:var(--d-font); font-weight:600;
+    font-size:15.5px; padding:14px 22px; border-radius:999px; cursor:pointer; border:1px solid transparent;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease; white-space:nowrap}
+  .btn svg{width:18px;height:18px}
+  .btn-primary{background:var(--accent); color:#04140C; box-shadow:0 10px 30px -10px var(--accent)}
+  .btn-primary:hover{transform:translateY(-2px); background:#FF9442}
+  .btn-ghost{background:transparent; color:var(--text); border-color:var(--line-2)}
+  .btn-ghost:hover{border-color:var(--text); transform:translateY(-2px)}
+  .btn-gold{background:var(--gold); color:#23180A}
+  .btn-gold:hover{transform:translateY(-2px); background:#F0BE5E}
+  .btn-block{width:100%; justify-content:center}
+
+  /* nav */
+  .nav{position:sticky; top:0; z-index:50; backdrop-filter:blur(14px);
+    background:rgba(10,14,22,.72); border-bottom:1px solid var(--line)}
+  .nav-in{display:flex; align-items:center; justify-content:space-between; height:68px}
+  .brand{display:flex; align-items:center; gap:11px; font-family:var(--d-font); font-weight:700; font-size:18px; letter-spacing:-.02em}
+  .brand .mark{width:34px; height:34px; border-radius:9px; display:grid; place-items:center;
+    background:linear-gradient(135deg,var(--accent),var(--accent-d)); color:#04140C; font-weight:700; font-size:16px}
+  .brand small{display:block; font-family:var(--m-font); font-weight:400; font-size:9.5px; letter-spacing:.16em; color:var(--faint); text-transform:uppercase; margin-top:1px}
+  .nav-links{display:flex; align-items:center; gap:30px}
+  .nav-links a{color:var(--muted); font-size:15px; font-weight:500; transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{display:flex; align-items:center; gap:14px}
+  .nav-cta .login{color:var(--muted); font-weight:500; font-size:15px}
+  .nav-cta .login:hover{color:var(--text)}
+  .menu-btn{display:none; background:none; border:0; color:var(--text); cursor:pointer; padding:6px}
+  @media(max-width:860px){
+    .nav-links{display:none} .nav-cta .login{display:none} .menu-btn{display:block}
+    .nav-cta .btn{padding:11px 18px; font-size:14px}
+  }
+
+  /* hero */
+  .hero{position:relative; padding:clamp(54px,8vw,104px) 0 clamp(60px,7vw,92px); overflow:hidden}
+  .hero::before{content:""; position:absolute; top:-220px; left:50%; transform:translateX(-60%);
+    width:760px; height:760px; background:radial-gradient(circle, var(--glow), transparent 62%); pointer-events:none}
+  .hero::after{content:""; position:absolute; bottom:-260px; right:-160px;
+    width:620px; height:620px; background:radial-gradient(circle, rgba(231,178,78,.07), transparent 62%); pointer-events:none}
+  .hero-grid{position:relative; display:grid; grid-template-columns:1.08fr .92fr; gap:clamp(30px,5vw,68px); align-items:center}
+  .hero h1{font-size:clamp(2.5rem,6.2vw,4.6rem); margin:20px 0 22px}
+  .hero h1 .hl{color:var(--accent)}
+  .hero .lead{max-width:30em}
+  .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin:32px 0 22px}
+  .trust{display:flex; align-items:center; gap:8px 18px; flex-wrap:wrap; color:var(--faint);
+    font-family:var(--m-font); font-size:12.5px; letter-spacing:.02em}
+  .trust b{color:var(--muted); font-weight:400}
+  .trust .sep{width:4px;height:4px;border-radius:50%;background:var(--faint)}
+  @media(max-width:880px){ .hero-grid{grid-template-columns:1fr} .hero-visual{order:-1; max-width:440px} }
+
+  /* chat signature */
+  .chat{background:linear-gradient(180deg,var(--panel),var(--ink-1)); border:1px solid var(--line-2);
+    border-radius:24px; padding:16px; box-shadow:0 40px 80px -30px rgba(0,0,0,.7); position:relative}
+  .chat-head{display:flex; align-items:center; justify-content:space-between; padding:4px 6px 14px; border-bottom:1px solid var(--line)}
+  .chat-id{display:flex; align-items:center; gap:10px; font-family:var(--d-font); font-weight:600; font-size:15px}
+  .chat-id .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+  .chat-id small{display:block;font-family:var(--b-font);font-weight:400;font-size:11.5px;color:var(--faint)}
+  .live{font-family:var(--m-font);font-size:10.5px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase}
+  .modes-tabs{display:flex; gap:7px; overflow-x:auto; padding:13px 2px; scrollbar-width:none}
+  .modes-tabs::-webkit-scrollbar{display:none}
+  .mode-tab{flex:none; font-family:var(--d-font); font-weight:500; font-size:12.5px; padding:7px 13px; border-radius:999px;
+    background:var(--panel-2); color:var(--muted); border:1px solid transparent; cursor:pointer; transition:.2s; white-space:nowrap}
+  .mode-tab.on{background:var(--accent); color:#04140C; font-weight:600}
+  .chat-body{min-height:228px; padding:8px 4px 4px; display:flex; flex-direction:column; gap:11px}
+  .bub{max-width:84%; padding:11px 14px; border-radius:15px; font-size:14.5px; line-height:1.5; animation:rise .4s ease both}
+  .bub.ai{align-self:flex-start; background:var(--panel-2); border:1px solid var(--line); border-bottom-left-radius:5px}
+  .bub.me{align-self:flex-end; background:linear-gradient(135deg,var(--accent),var(--accent-d)); color:#04140C; font-weight:500; border-bottom-right-radius:5px}
+  .bub b{color:var(--accent); font-weight:700}
+  .bub.me b{color:#04140C; text-decoration:underline}
+  .bub .note{display:block; margin-top:6px; padding-top:6px; border-top:1px dashed var(--line-2); font-size:12.5px; color:var(--muted)}
+  .score{align-self:flex-start; display:flex; align-items:center; gap:11px; background:rgba(255,122,24,.1);
+    border:1px solid rgba(255,122,24,.3); padding:9px 13px; border-radius:13px; font-size:13px; color:var(--muted); animation:rise .4s ease both}
+  .score .n{font-family:var(--m-font); font-weight:700; font-size:21px; color:var(--accent); line-height:1}
+  @keyframes rise{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+
+  /* section base */
+  .section{padding:clamp(58px,8vw,108px) 0; border-top:1px solid var(--line)}
+  .section-head{max-width:660px; margin-bottom:46px}
+  .section-head h2{font-size:clamp(1.9rem,4.4vw,3.05rem); margin:16px 0 14px}
+  .section.alt{background:var(--ink-1)}
+
+  /* insight */
+  .insight h2{font-size:clamp(2rem,5vw,3.4rem); max-width:16ch}
+  .insight .big{color:var(--faint)} .insight .big .k{color:var(--text)}
+  .insight p{max-width:54ch; margin-top:24px; color:var(--muted)}
+
+  /* modes detail */
+  .mode-list{display:grid; gap:14px}
+  .mode-row{display:flex; gap:16px; align-items:flex-start; padding:20px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r); transition:.2s}
+  .mode-row:hover{border-color:var(--line-2); transform:translateY(-2px)}
+  .mode-row .ix{font-family:var(--m-font); font-size:13px; color:var(--accent); padding-top:3px}
+  .mode-row h3{font-size:18px; margin-bottom:5px}
+  .mode-row p{color:var(--muted); font-size:14.5px; margin:0}
+  .split{display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(30px,5vw,60px); align-items:start}
+  @media(max-width:860px){ .split{grid-template-columns:1fr} }
+
+  /* trilhas */
+  .trilhas-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .trilha{padding:26px 24px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r);
+    position:relative; overflow:hidden; transition:.2s}
+  .trilha:hover{transform:translateY(-4px); border-color:var(--line-2)}
+  .trilha::after{content:""; position:absolute; left:0; top:0; width:3px; height:100%; background:var(--accent); opacity:.65}
+  .trilha .tag{font-family:var(--m-font); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint)}
+  .trilha h3{font-size:21px; margin:12px 0 9px}
+  .trilha p{color:var(--muted); font-size:14.5px; margin:0}
+  .trilha .topics{margin-top:15px; font-family:var(--m-font); font-size:11.5px; color:var(--faint)}
+  .trilha.exec::after{background:var(--gold)}
+  .trilha.exec h3{color:var(--gold)}
+  @media(max-width:820px){ .trilhas-grid{grid-template-columns:1fr 1fr} }
+  @media(max-width:540px){ .trilhas-grid{grid-template-columns:1fr} }
+
+  /* steps */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; counter-reset:s}
+  .step{position:relative; padding-top:30px}
+  .step .num{font-family:var(--m-font); font-weight:700; font-size:14px; color:var(--accent); letter-spacing:.1em}
+  .step h3{font-size:20px; margin:14px 0 9px}
+  .step p{color:var(--muted); font-size:14.5px; margin:0}
+  .step::before{content:""; position:absolute; top:8px; left:0; width:38px; height:2px; background:var(--accent)}
+  @media(max-width:760px){ .steps{grid-template-columns:1fr; gap:30px} }
+
+  /* features */
+  .feat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--r); overflow:hidden}
+  .feat{background:var(--ink); padding:26px 22px; transition:background .2s}
+  .feat:hover{background:var(--panel)}
+  .feat .ic{width:30px;height:30px;color:var(--accent);margin-bottom:14px}
+  .feat h3{font-size:16.5px; margin-bottom:7px}
+  .feat p{color:var(--muted); font-size:13.5px; margin:0; line-height:1.5}
+  @media(max-width:900px){ .feat-grid{grid-template-columns:1fr 1fr} }
+  @media(max-width:480px){ .feat-grid{grid-template-columns:1fr} }
+
+  /* pricing */
+  .price-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; align-items:stretch; max-width:760px; margin:0 auto}
+  .plan{display:flex; flex-direction:column; padding:30px 26px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r); position:relative}
+  .plan.pop{border-color:var(--accent); box-shadow:0 30px 70px -34px var(--accent)}
+  .plan.exec{border-color:rgba(231,178,78,.4)}
+  .plan .name{font-family:var(--m-font); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+  .plan.pop .name{color:var(--accent)} .plan.exec .name{color:var(--gold)}
+  .badge{position:absolute; top:-12px; left:26px; font-family:var(--m-font); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+    background:var(--accent); color:#04140C; padding:5px 12px; border-radius:999px; font-weight:700}
+  .price{display:flex; align-items:baseline; gap:4px; margin:18px 0 4px; font-family:var(--d-font)}
+  .price .amt{font-size:42px; font-weight:700; letter-spacing:-.03em}
+  .price .per{color:var(--faint); font-size:14px; font-family:var(--b-font)}
+  .plan .desc{color:var(--faint); font-size:13.5px; min-height:38px}
+  .plan ul{list-style:none; margin:22px 0; display:grid; gap:12px; flex:1}
+  .plan li{display:flex; gap:11px; font-size:14.5px; color:var(--muted); line-height:1.4}
+  .plan li svg{width:18px;height:18px;color:var(--accent);flex:none;margin-top:2px}
+  .plan.exec li svg{color:var(--gold)}
+  @media(max-width:880px){ .price-grid{grid-template-columns:1fr; max-width:440px; margin:0 auto} }
+
+  /* perfis */
+  .perfis{display:flex; flex-wrap:wrap; gap:12px}
+  .perfil{display:flex; flex-direction:column; gap:4px; padding:18px 22px; background:var(--panel); border:1px solid var(--line); border-radius:var(--r-sm); flex:1; min-width:180px}
+  .perfil .t{font-family:var(--d-font); font-weight:600; font-size:16px}
+  .perfil .d{color:var(--faint); font-size:13px}
+
+  /* faq */
+  .faq-list{display:grid; gap:12px; max-width:760px}
+  details{background:var(--panel); border:1px solid var(--line); border-radius:var(--r-sm); padding:0 22px; transition:.2s}
+  details[open]{border-color:var(--line-2)}
+  summary{list-style:none; cursor:pointer; padding:20px 0; font-family:var(--d-font); font-weight:600; font-size:16.5px;
+    display:flex; justify-content:space-between; align-items:center; gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary .pm{font-family:var(--m-font); color:var(--accent); font-size:22px; flex:none; transition:transform .2s}
+  details[open] summary .pm{transform:rotate(45deg)}
+  details p{color:var(--muted); font-size:15px; padding:0 0 22px; margin:0; max-width:64ch}
+
+  /* final cta */
+  .final{position:relative; text-align:center; padding:clamp(70px,10vw,130px) 0; overflow:hidden; border-top:1px solid var(--line)}
+  .final::before{content:""; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:760px; height:480px; background:radial-gradient(ellipse, var(--glow), transparent 65%); pointer-events:none}
+  .final h2{position:relative; font-size:clamp(2.2rem,6vw,4rem); max-width:16ch; margin:18px auto 18px}
+  .final .lead{position:relative; max-width:46ch; margin:0 auto 34px}
+  .final .btn{position:relative}
+
+  /* footer */
+  .footer{border-top:1px solid var(--line); padding:54px 0 40px}
+  .footer-in{display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap}
+  .footer .slogan{font-family:var(--d-font); font-weight:600; font-size:17px; margin-top:14px; color:var(--muted)}
+  .footer .cols{display:flex; gap:54px; flex-wrap:wrap}
+  .footer h4{font-family:var(--m-font); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); margin-bottom:14px}
+  .footer a{display:block; color:var(--muted); font-size:14.5px; padding:5px 0; transition:color .2s}
+  .footer a:hover{color:var(--accent)}
+  .copy{margin-top:40px; padding-top:24px; border-top:1px solid var(--line); color:var(--faint); font-family:var(--m-font); font-size:12px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+  @media(prefers-reduced-motion:reduce){ *{animation:none!important; transition:none!important; scroll-behavior:auto!important} }
+
+  /* mobile menu sheet */
+  .sheet{position:fixed; inset:0; z-index:60; background:rgba(10,14,22,.96); backdrop-filter:blur(8px); display:none; flex-direction:column; padding:24px}
+  .sheet.show{display:flex}
+  .sheet-top{display:flex; justify-content:space-between; align-items:center; margin-bottom:30px}
+  .sheet a{font-family:var(--d-font); font-weight:600; font-size:24px; padding:16px 0; border-bottom:1px solid var(--line)}
+  .sheet .btn{margin-top:24px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="brand">
+      <span class="mark">E</span>
+      <span>English for Success<small>Learn · Build · Grow</small></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#metodo">O método</a>
+      <a href="#trilhas">Trilhas</a>
+      <a href="#recursos">Recursos</a>
+      <a href="#precos">Preços</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#" class="login">Entrar</a>
+      <a href="#precos" class="btn btn-primary">Começar grátis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="menu-btn" aria-label="Abrir menu" onclick="document.getElementById('sheet').classList.add('show')">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="sheet" id="sheet">
+  <div class="sheet-top">
+    <span class="brand"><span class="mark">E</span> English for Success</span>
+    <button class="menu-btn" aria-label="Fechar" onclick="document.getElementById('sheet').classList.remove('show')">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a href="#metodo" onclick="closeSheet()">O método</a>
+  <a href="#trilhas" onclick="closeSheet()">Trilhas</a>
+  <a href="#recursos" onclick="closeSheet()">Recursos</a>
+  <a href="#precos" onclick="closeSheet()">Preços</a>
+  <a href="#precos" class="btn btn-primary btn-block" onclick="closeSheet()">Começar grátis</a>
+</div>
+
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Inglês com IA · para quem quer crescer</span>
+      <h1>Inglês não muda só o seu vocabulário. Muda o seu <span class="hl">salário.</span></h1>
+      <p class="lead">Um professor de inteligência artificial 24 horas por dia, focado em carreira, imigração e negócios. Pare de decorar regras — comece a usar o inglês que abre portas no mundo real.</p>
+      <div class="hero-actions">
+        <a href="#precos" class="btn btn-primary">Começar grátis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#metodo" class="btn btn-ghost">Ver o método</a>
+      </div>
+      <div class="trust">
+        <b>Sem cartão</b><span class="sep"></span>
+        <b>+10.000 palavras</b><span class="sep"></span>
+        <b>5 trilhas de carreira</b><span class="sep"></span>
+        <b>Professor IA 24/7</b>
+      </div>
+    </div>
+
+    <!-- SIGNATURE: chat IA -->
+    <div class="hero-visual">
+      <div class="chat">
+        <div class="chat-head">
+          <div class="chat-id"><span class="dot"></span><span>Professor IA<small>Online agora · responde na hora</small></span></div>
+          <span class="live">● Ao vivo</span>
+        </div>
+        <div class="modes-tabs" id="tabs">
+          <button class="mode-tab on" data-m="prof">Professor</button>
+          <button class="mode-tab" data-m="pron">Pronúncia</button>
+          <button class="mode-tab" data-m="entr">Entrevistas</button>
+          <button class="mode-tab" data-m="neg">Negócios</button>
+          <button class="mode-tab" data-m="ment">Mentor</button>
+        </div>
+        <div class="chat-body" id="chatBody"><!-- preenchido via JS --></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHT / MÉTODO -->
+<section class="section insight" id="metodo">
+  <div class="wrap">
+    <span class="eyebrow">O método</span>
+    <h2 class="big" style="margin-top:18px"><span class="k">Você estudou inglês a vida toda</span> e ainda trava numa entrevista.</h2>
+    <p>O problema não é você — é o método. Cursos tradicionais ensinam gramática para passar em prova. O English for Success treina você para a vida real: a entrevista, a reunião, o pitch, a mudança de país. Você aprende fazendo, com um mentor que corrige na hora, lembra dos seus erros e puxa o seu próximo nível.</p>
+  </div>
+</section>
+
+<!-- PROFESSOR IA / MODOS -->
+<section class="section alt" id="professor">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Professor IA 24h</span>
+      <h2 style="font-size:clamp(1.9rem,4.4vw,3.05rem); margin:16px 0 14px">Cinco mentores. Um só app.</h2>
+      <p class="lead">Conversa, pronúncia, entrevistas, negócios e carreira. A mesma IA muda de papel conforme o seu objetivo — disponível a qualquer hora, sem marcar aula.</p>
+      <a href="#precos" class="btn btn-primary" style="margin-top:28px">Falar com o Professor IA <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="mode-list">
+      <div class="mode-row"><span class="ix">01</span><div><h3>Professor</h3><p>Explica regras e tira dúvidas do jeito que você entende — com exemplos do dia a dia.</p></div></div>
+      <div class="mode-row"><span class="ix">02</span><div><h3>Coach de Pronúncia</h3><p>Você fala, ele dá nota de 0 a 100 e corrige o seu sotaque, palavra por palavra.</p></div></div>
+      <div class="mode-row"><span class="ix">03</span><div><h3>Coach de Entrevistas</h3><p>Simula entrevistas reais e te prepara para o "tell me about yourself" sem gelar.</p></div></div>
+      <div class="mode-row"><span class="ix">04</span><div><h3>Coach de Negócios</h3><p>Reuniões, negociação e apresentações no inglês que o mundo corporativo exige.</p></div></div>
+      <div class="mode-row"><span class="ix">05</span><div><h3>Mentor Profissional</h3><p>CV, LinkedIn e a estratégia para conseguir o emprego — aqui ou lá fora.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRILHAS -->
+<section class="section" id="trilhas">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">As trilhas</span>
+      <h2>Um caminho para cada objetivo.</h2>
+      <p class="lead">Da sobrevivência no dia a dia ao inglês que fecha negócios milionários. Escolha o seu destino — a IA monta o trajeto.</p>
+    </div>
+    <div class="trilhas-grid">
+      <div class="trilha"><span class="tag">Nível base</span><h3>Everyday English</h3><p>O inglês do dia a dia, sem travar nas situações comuns.</p><div class="topics">Família · Compras · Transporte · Restaurantes</div></div>
+      <div class="trilha"><span class="tag">Imigração 🇬🇧</span><h3>UK Life English</h3><p>Para viver no Reino Unido de verdade, com confiança.</p><div class="topics">NHS · Bancos · Moradia · Council Tax · Benefícios</div></div>
+      <div class="trilha"><span class="tag">Carreira</span><h3>Career English</h3><p>O inglês que conquista a vaga e a promoção.</p><div class="topics">CV · LinkedIn · Entrevistas · Reuniões · Networking</div></div>
+      <div class="trilha"><span class="tag">Corporativo</span><h3>Business English</h3><p>Comunicação empresarial de alto nível.</p><div class="topics">Marketing · Vendas · Negociação · Gestão · Liderança</div></div>
+      <div class="trilha exec"><span class="tag">Executive</span><h3>Entrepreneur English</h3><p>Para empreender e captar no mercado global.</p><div class="topics">Startups · Pitch · Investimento · Valuation · Escala</div></div>
+      <div class="trilha" style="display:flex;flex-direction:column;justify-content:center">
+        <h3 style="font-size:18px">+ Repetição espaçada</h3><p>A IA revisa a palavra certa, na hora certa, para você nunca mais esquecer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section alt" id="como">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Três passos. Resultado em semanas.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="num">01 — Teste</span><h3>Descubra seu nível real</h3><p>Um teste rápido define seu nível de A1 a C2. Sem achismo: a IA mede onde você está.</p></div>
+      <div class="step"><span class="num">02 — Plano</span><h3>A IA monta sua rota</h3><p>Aulas e trilhas personalizadas para o seu objetivo — emprego, mudança de país ou negócios.</p></div>
+      <div class="step"><span class="num">03 — Evolução</span><h3>Você treina todo dia</h3><p>Conversa, pronúncia, simulações e revisão inteligente. Progresso visível, dia após dia.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RECURSOS -->
+<section class="section" id="recursos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Recursos</span>
+      <h2>Tudo que um curso tem — e o que ele nunca teve.</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-6A8.5 8.5 0 1 1 21 11.5z"/></svg><h3>Chat por texto e voz</h3><p>Converse como no WhatsApp. Ouça a resposta e fale de volta.</p></div>
+      <div class="feat"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><h3>Pronúncia com nota</h3><p>Fale e receba uma avaliação de 0 a 100, com correção de sotaque.</p></div>
+      <div class="feat"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 4h16v13H7l-3 3z"/><path d="M8 9h8M8 13h5"/></svg><h3>Escrita profissional</h3><p>Gere e corrija emails, CV, LinkedIn e propostas comerciais.</p></div>
+      <div class="feat"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19V5a2 2 0 0 1 2-2h11l3 3v13M4 19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2"/><path d="M8 8h6"/></svg><h3>Vocabulário inteligente</h3><p>Mais de 10.000 palavras com áudio, exemplos e expressões.</p></div>
+      <div class="feat"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5M12 7v5l3 2"/></svg><h3>Repetição espaçada</h3><p>A IA revisa a palavra certa, na hora certa. Memória de longo prazo.</p></div>
+      <div class="feat"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M16 3a4 4 0 0 1 0 8M8 3a4 4 0 0 0 0 8M2 21v-1a5 5 0 0 1 5-5h2M22 21v-1a5 5 0 0 0-5-5h-2"/></svg><h3>Simulações reais</h3><p>Entreviste com um recrutador. Faça um pitch para um investidor.</p></div>
+      <div class="feat"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg><h3>Dashboard de evolução</h3><p>Speaking, listening, reading e writing — tudo num lugar só.</p></div>
+      <div class="feat"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="9" r="6"/><path d="M9 14l-2 7 5-3 5 3-2-7"/></svg><h3>Certificação A1–C2</h3><p>Prove o seu nível com um certificado digital de verdade.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PREÇOS -->
+<section class="section alt" id="precos">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Planos</span>
+      <h2>Investir em inglês é investir em você.</h2>
+      <p class="lead">Comece de graça. Quando sentir o resultado, vire Premium e libere tudo.</p>
+    </div>
+    <div class="price-grid">
+      <div class="plan">
+        <span class="name">Free</span>
+        <div class="price"><span class="amt" data-brl="R$ 0">£0</span></div>
+        <p class="desc">Para experimentar e criar o hábito.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg> 20 mensagens por dia</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg> Trilhas e lições com IA</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg> Vocabulário e pronúncia</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg> Teste de nível</li>
+        </ul>
+        <a href="#" class="btn btn-ghost btn-block">Começar grátis</a>
+      </div>
+
+      <div class="plan pop">
+        <span class="badge">Mais popular</span>
+        <span class="name">Premium</span>
+        <div class="price"><span class="amt" data-brl="R$ 12">£7</span><span class="per">/mês</span></div>
+        <p class="desc">Tudo liberado, sem limites.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg> Professor IA <b style="color:var(--text)">ilimitado</b></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg> Voz e pronúncia sem limite</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg> Todas as 5 trilhas e simulações</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg> Correção avançada da IA</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12l5 5L20 6"/></svg> Tudo desbloqueado</li>
+        </ul>
+        <a href="#" class="btn btn-primary btn-block">Assinar Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERFIS -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Para quem é</span>
+      <h2>Feito para quem não aceita ficar parado.</h2>
+    </div>
+    <div class="perfis">
+      <div class="perfil"><span class="t">Iniciante</span><span class="d">Começa do zero, com método.</span></div>
+      <div class="perfil"><span class="t">Imigrante</span><span class="d">Vai viver no exterior.</span></div>
+      <div class="perfil"><span class="t">Profissional</span><span class="d">Quer a próxima vaga.</span></div>
+      <div class="perfil"><span class="t">Empreendedor</span><span class="d">Mira o mercado global.</span></div>
+      <div class="perfil"><span class="t">Executivo</span><span class="d">Lidera em inglês.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Dúvidas</span>
+      <h2>O que você precisa saber.</h2>
+    </div>
+    <div class="faq-list">
+      <details><summary>Preciso já saber inglês para começar?<span class="pm">+</span></summary><p>Não. A IA se adapta ao seu nível, do A1 (zero) ao C2 (avançado). O teste inicial descobre onde você está e o conteúdo se ajusta a você.</p></details>
+      <details><summary>Funciona no celular?<span class="pm">+</span></summary><p>Sim, 100%. Tudo roda no navegador do seu celular — sem instalar nada. Estude no ônibus, na fila ou no sofá.</p></details>
+      <details><summary>A IA fala comigo por voz?<span class="pm">+</span></summary><p>Sim. Você ouve a pronúncia nativa e fala de volta. O Coach de Pronúncia avalia sua fala de 0 a 100 e corrige seu sotaque.</p></details>
+      <details><summary>Posso cancelar quando quiser?<span class="pm">+</span></summary><p>Sim, sem multa e sem burocracia. Você cancela com um clique e mantém o acesso até o fim do período pago.</p></details>
+      <details><summary>É melhor que um curso tradicional?<span class="pm">+</span></summary><p>É diferente. Em vez de decorar gramática para uma prova, você treina para a vida real — a entrevista, a reunião, o pitch — com um mentor disponível 24 horas que lembra dos seus erros.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center">Learn English. Build Your Future.</span>
+    <h2>O próximo nível da sua vida fala inglês.</h2>
+    <p class="lead">Comece hoje, de graça. Seu futuro não espera — e a concorrência também não.</p>
+    <a href="#precos" class="btn btn-primary">Começar agora <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap footer-in">
+    <div style="max-width:300px">
+      <span class="brand"><span class="mark">E</span> English for Success</span>
+      <p class="slogan">Learn English.<br>Build Your Future.</p>
+    </div>
+    <div class="cols">
+      <div>
+        <h4>Produto</h4>
+        <a href="#professor">Professor IA</a>
+        <a href="#trilhas">Trilhas</a>
+        <a href="#recursos">Recursos</a>
+        <a href="#precos">Preços</a>
+      </div>
+      <div>
+        <h4>Trilhas</h4>
+        <a href="#trilhas">Everyday</a>
+        <a href="#trilhas">UK Life</a>
+        <a href="#trilhas">Career</a>
+        <a href="#trilhas">Business</a>
+        <a href="#trilhas">Entrepreneur</a>
+      </div>
+      <div>
+        <h4>Conta</h4>
+        <a href="#">Entrar</a>
+        <a href="#precos">Criar conta</a>
+        <a href="#">Suporte</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap copy">
+    <span>© 2026 English for Success</span>
+    <span>Feito para brasileiros ambiciosos 🇧🇷</span>
+  </div>
+</footer>
+
+<script>
+  // Preço em R$ para quem acessa do Brasil (pelo fuso horário). Resto do mundo vê £.
+  (function(){
+    try {
+      var tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || "").toLowerCase();
+      if (/sao_paulo|bahia|fortaleza|recife|manaus|belem|campo_grande|cuiaba|boa_vista|porto_velho|rio_branco|maceio|araguaina|santarem|noronha/.test(tz)) {
+        document.querySelectorAll('[data-brl]').forEach(function(el){ el.textContent = el.getAttribute('data-brl'); });
+      }
+    } catch (e) {}
+  })();
+
+  function closeSheet(){ document.getElementById('sheet').classList.remove('show'); }
+
+  // Hero chat — conteúdo por modo
+  var MODES = {
+    prof: [
+      {who:'ai', html:"What's your goal with English? 🎯"},
+      {who:'me', html:"Quero passar numa entrevista de emprego."},
+      {who:'ai', html:"Perfect. Let's start with: <b>\"Tell me about yourself.\"</b><span class='note'>Dica: comece pela sua área e um resultado com números.</span>"}
+    ],
+    pron: [
+      {who:'ai', html:"Repeat after me: <b>\"I'd like to schedule a meeting.\"</b>"},
+      {who:'me', html:"🎙️ I'd like to schedule a meeting."},
+      {who:'score', n:'92', txt:"Pronúncia · clara e natural. Cuidado com a tônica de <b>schedule</b>."}
+    ],
+    entr: [
+      {who:'ai', html:"<b>Recrutador:</b> Why should we hire you?"},
+      {who:'me', html:"I'm a developer with 5 years of experience..."},
+      {who:'ai', html:"Good start. Add one achievement with numbers — recruiters love impact. 📈"}
+    ],
+    neg: [
+      {who:'me', html:"Como começo um email para um cliente?"},
+      {who:'ai', html:"Try: <b>\"I hope this email finds you well. I'm writing to follow up on...\"</b><span class='note'>Tom profissional, direto e cordial.</span>"}
+    ],
+    ment: [
+      {who:'me', html:"Como melhoro meu LinkedIn em inglês?"},
+      {who:'ai', html:"Comece pelo headline que vende resultado: <b>\"I help X achieve Y.\"</b> Quer que eu reescreva o seu? ✍️"}
+    ]
+  };
+  function render(mode){
+    var body = document.getElementById('chatBody');
+    body.innerHTML = '';
+    MODES[mode].forEach(function(m, i){
+      var el = document.createElement('div');
+      el.style.animationDelay = (i*0.09)+'s';
+      if(m.who === 'score'){
+        el.className = 'score';
+        el.innerHTML = "<span class='n'>"+m.n+"</span><span>"+m.txt+"</span>";
+      } else {
+        el.className = 'bub ' + m.who;
+        el.innerHTML = m.html;
+      }
+      body.appendChild(el);
+    });
+  }
+  document.getElementById('tabs').addEventListener('click', function(e){
+    var b = e.target.closest('.mode-tab'); if(!b) return;
+    document.querySelectorAll('.mode-tab').forEach(function(t){ t.classList.remove('on'); });
+    b.classList.add('on');
+    render(b.dataset.m);
+  });
+  render('prof');
+</script>
+</body>
+</html>
