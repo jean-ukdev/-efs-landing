@@ -117,8 +117,6 @@
   .bub-act:hover{color:var(--accent)}
   .bub-act.on{color:var(--accent)}
   .bub-act svg{width:13px; height:13px; flex:none}
-  .bub-act-ic{padding:1px 2px}
-  .bub-act-ic svg{width:15px; height:15px}
   .bub-pt{align-self:flex-start; max-width:86%; font-size:13px; line-height:1.45; color:var(--muted); font-style:italic; padding:0 4px}
   .bub-pt b{color:var(--accent); font-style:normal}
   @keyframes rise{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
@@ -592,7 +590,7 @@
       else if(m.m){ add('bub me', m.m); }
       else {
         add('bub ai', "<span class='bub-en'>"+m.a+"</span>"+(m.note?"<span class='note'>"+m.note+"</span>":""));
-        var acts = '<button class="bub-act bub-act-ic" onclick="sayEN(this)" aria-label="Ouvir">'+SPK+'</button>';
+        var acts = '<button class="bub-act" onclick="sayEN(this)">'+SPK+'Ouvir</button>';
         if(m.pt){ acts += '<button class="bub-act" onclick="togglePT(this)">'+TRN+'Traduzir</button>'; }
         add('bub-actions', acts);
         if(m.pt){ add('bub-pt', m.pt, true); }
