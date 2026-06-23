@@ -19,7 +19,7 @@
     --d-font:'Space Grotesk',sans-serif; --b-font:'Inter',sans-serif; --m-font:'Space Mono',monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth; overflow-x:hidden}
   body{
     background:var(--ink); color:var(--text); font-family:var(--b-font);
     font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
@@ -34,7 +34,7 @@
   }
   .eyebrow::before{content:""; width:22px; height:1px; background:var(--accent); display:inline-block}
   .eyebrow.muted{color:var(--faint)} .eyebrow.muted::before{background:var(--faint)}
-  h1,h2,h3{font-family:var(--d-font); font-weight:700; letter-spacing:-.025em; line-height:1.05}
+  h1,h2,h3{font-family:var(--d-font); font-weight:700; letter-spacing:-.025em; line-height:1.05; overflow-wrap:break-word}
   .lead{color:var(--muted); font-size:clamp(1.02rem,1.6vw,1.2rem)}
   .mono{font-family:var(--m-font)}
 
@@ -70,6 +70,7 @@
     .nav-links{display:none} .nav-cta .login{display:none} .menu-btn{display:block}
     .nav-cta .btn{padding:11px 18px; font-size:14px}
   }
+  @media(max-width:560px){ .nav-cta .btn{display:none} .brand small{display:none} }
 
   /* hero */
   .hero{position:relative; padding:clamp(54px,8vw,104px) 0 clamp(60px,7vw,92px); overflow:hidden}
@@ -86,11 +87,11 @@
     font-family:var(--m-font); font-size:12.5px; letter-spacing:.02em}
   .trust b{color:var(--muted); font-weight:400}
   .trust .sep{width:4px;height:4px;border-radius:50%;background:var(--faint)}
-  @media(max-width:880px){ .hero-grid{grid-template-columns:1fr} .hero-visual{order:-1; max-width:440px} }
+  @media(max-width:880px){ .hero-grid{grid-template-columns:1fr} .hero-visual{order:-1; max-width:440px; min-width:0} .hero-grid>*{min-width:0} }
 
   /* chat signature */
   .chat{background:linear-gradient(180deg,var(--panel),var(--ink-1)); border:1px solid var(--line-2);
-    border-radius:24px; padding:16px; box-shadow:0 40px 80px -30px rgba(0,0,0,.7); position:relative}
+    border-radius:24px; padding:16px; box-shadow:0 40px 80px -30px rgba(0,0,0,.7); position:relative; max-width:100%}
   .chat-head{display:flex; align-items:center; justify-content:space-between; padding:4px 6px 14px; border-bottom:1px solid var(--line)}
   .chat-id{display:flex; align-items:center; gap:10px; font-family:var(--d-font); font-weight:600; font-size:15px}
   .chat-id .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--glow)}
@@ -102,7 +103,7 @@
     background:var(--panel-2); color:var(--muted); border:1px solid transparent; cursor:pointer; transition:.2s; white-space:nowrap}
   .mode-tab.on{background:var(--accent); color:#04140C; font-weight:600}
   .chat-body{min-height:228px; padding:8px 4px 4px; display:flex; flex-direction:column; gap:11px}
-  .bub{max-width:84%; padding:11px 14px; border-radius:15px; font-size:14.5px; line-height:1.5; animation:rise .4s ease both}
+  .bub{max-width:84%; padding:11px 14px; border-radius:15px; font-size:14.5px; line-height:1.5; overflow-wrap:break-word; animation:rise .4s ease both}
   .bub.ai{align-self:flex-start; background:var(--panel-2); border:1px solid var(--line); border-bottom-left-radius:5px}
   .bub.me{align-self:flex-end; background:linear-gradient(135deg,var(--accent),var(--accent-d)); color:#04140C; font-weight:500; border-bottom-right-radius:5px}
   .bub b{color:var(--accent); font-weight:700}
@@ -132,7 +133,7 @@
   .mode-row h3{font-size:18px; margin-bottom:5px}
   .mode-row p{color:var(--muted); font-size:14.5px; margin:0}
   .split{display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(30px,5vw,60px); align-items:start}
-  @media(max-width:860px){ .split{grid-template-columns:1fr} }
+  @media(max-width:860px){ .split{grid-template-columns:1fr} .split>*{min-width:0} }
 
   /* trilhas */
   .trilhas-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
@@ -310,6 +311,13 @@
         <div class="chat-body" id="chatBody"><!-- preenchido via JS --></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- SLOGAN -->
+<section class="section alt" style="text-align:center; padding:clamp(50px,8vw,96px) 0;">
+  <div class="wrap">
+    <p style="font-family:var(--d-font); font-weight:700; font-size:clamp(1.65rem,4.6vw,3rem); line-height:1.2; letter-spacing:-.02em; max-width:21ch; margin:0 auto; overflow-wrap:break-word;">Não aprenda inglês apenas para estudar. <span style="color:var(--accent)">Aprenda inglês para crescer na vida.</span></p>
   </div>
 </section>
 
