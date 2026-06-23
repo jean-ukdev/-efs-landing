@@ -112,6 +112,15 @@
   .score{align-self:flex-start; display:flex; align-items:center; gap:11px; background:rgba(255,122,24,.1);
     border:1px solid rgba(255,122,24,.3); padding:9px 13px; border-radius:13px; font-size:13px; color:var(--muted); animation:rise .4s ease both}
   .score .n{font-family:var(--m-font); font-weight:700; font-size:21px; color:var(--accent); line-height:1}
+  .bub-actions{display:flex; gap:16px; align-self:flex-start; padding:1px 4px 2px}
+  .bub-act{display:inline-flex; align-items:center; gap:5px; background:none; border:0; color:var(--faint); font-family:var(--m-font); font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; cursor:pointer; padding:0; transition:color .2s}
+  .bub-act:hover{color:var(--accent)}
+  .bub-act.on{color:var(--accent)}
+  .bub-act svg{width:13px; height:13px; flex:none}
+  .bub-act-ic{padding:1px 2px}
+  .bub-act-ic svg{width:15px; height:15px}
+  .bub-pt{align-self:flex-start; max-width:86%; font-size:13px; line-height:1.45; color:var(--muted); font-style:italic; padding:0 4px}
+  .bub-pt b{color:var(--accent); font-style:normal}
   @keyframes rise{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
 
   /* section base */
@@ -287,7 +296,6 @@
         <a href="#metodo" class="btn btn-ghost">Ver o método</a>
       </div>
       <div class="trust">
-        <b>Sem cartão</b><span class="sep"></span>
         <b>+10.000 palavras</b><span class="sep"></span>
         <b>5 trilhas de carreira</b><span class="sep"></span>
         <b>Professor IA 24/7</b>
@@ -542,44 +550,69 @@
   // Hero chat — conteúdo por modo
   var MODES = {
     prof: [
-      {who:'ai', html:"What's your goal with English? 🎯"},
-      {who:'me', html:"Quero passar numa entrevista de emprego."},
-      {who:'ai', html:"Perfect. Let's start with: <b>\"Tell me about yourself.\"</b><span class='note'>Dica: comece pela sua área e um resultado com números.</span>"}
+      {a:"What's your goal with English? 🎯", pt:"Qual é o seu objetivo com o inglês? 🎯"},
+      {m:"Quero passar numa entrevista de emprego."},
+      {a:'Perfect. Let\'s start with: <b>"Tell me about yourself."</b>', note:"Dica: comece pela sua área e diga a sua pretensão salarial.", pt:'Perfeito. Vamos começar com: <b>"Fale sobre você."</b>'}
     ],
     pron: [
-      {who:'ai', html:"Repeat after me: <b>\"I'd like to schedule a meeting.\"</b>"},
-      {who:'me', html:"🎙️ I'd like to schedule a meeting."},
-      {who:'score', n:'92', txt:"Pronúncia · clara e natural. Cuidado com a tônica de <b>schedule</b>."}
+      {a:'Repeat after me: <b>"I\'d like to schedule a meeting."</b>', pt:'Repita comigo: <b>"Eu gostaria de agendar uma reunião."</b>'},
+      {m:"🎙️ I'd like to schedule a meeting."},
+      {s:'92', t:"Pronúncia · clara e natural. Cuidado com a tônica de <b>schedule</b>."}
     ],
     entr: [
-      {who:'ai', html:"<b>Recrutador:</b> Why should we hire you?"},
-      {who:'me', html:"I'm a developer with 5 years of experience..."},
-      {who:'ai', html:"Good start. Add one achievement with numbers — recruiters love impact. 📈"}
+      {a:"<b>Recruiter:</b> Why should we hire you?", pt:"<b>Recrutador:</b> Por que deveríamos te contratar?"},
+      {m:"I'm a developer with 5 years of experience..."},
+      {a:"Good start. Add one achievement with numbers — recruiters love impact. 📈", pt:"Bom começo. Adicione uma conquista com números — recrutadores amam impacto. 📈"}
     ],
     neg: [
-      {who:'me', html:"Como começo um email para um cliente?"},
-      {who:'ai', html:"Try: <b>\"I hope this email finds you well. I'm writing to follow up on...\"</b><span class='note'>Tom profissional, direto e cordial.</span>"}
+      {m:"Como começo um email para um cliente?"},
+      {a:'Try: <b>"I hope this email finds you well. I\'m writing to follow up on..."</b>', note:"Tom profissional, direto e cordial.", pt:'Tente: <b>"Espero que este email o encontre bem. Estou escrevendo para dar seguimento a..."</b>'}
     ],
     ment: [
-      {who:'me', html:"Como melhoro meu LinkedIn em inglês?"},
-      {who:'ai', html:"Comece pelo headline que vende resultado: <b>\"I help X achieve Y.\"</b> Quer que eu reescreva o seu? ✍️"}
+      {m:"Como melhoro meu LinkedIn em inglês?"},
+      {a:'Start your headline with the outcome you deliver: <b>"I help X achieve Y."</b> Want me to rewrite yours? ✍️', pt:'Comece o headline pelo resultado que você entrega: <b>"Eu ajudo X a alcançar Y."</b> Quer que eu reescreva o seu? ✍️'}
     ]
   };
+  var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>';
+  var TRN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h7"/><path d="M9 3v2c0 4-2 7-5 8"/><path d="M5 9c0 2.5 2.5 4.5 6 5.5"/><path d="M13 19l4-9 4 9"/><path d="M14.5 16h5"/></svg>';
+
   function render(mode){
+    try { window.speechSynthesis.cancel(); } catch(e){}
     var body = document.getElementById('chatBody');
     body.innerHTML = '';
-    MODES[mode].forEach(function(m, i){
+    var d = 0;
+    function add(cls, html, hidden){
       var el = document.createElement('div');
-      el.style.animationDelay = (i*0.09)+'s';
-      if(m.who === 'score'){
-        el.className = 'score';
-        el.innerHTML = "<span class='n'>"+m.n+"</span><span>"+m.txt+"</span>";
-      } else {
-        el.className = 'bub ' + m.who;
-        el.innerHTML = m.html;
+      el.className = cls; el.style.animationDelay = d.toFixed(2)+'s';
+      if(hidden){ el.hidden = true; }
+      el.innerHTML = html; body.appendChild(el);
+    }
+    MODES[mode].forEach(function(m){
+      if(m.s){ add('score', "<span class='n'>"+m.s+"</span><span>"+m.t+"</span>"); }
+      else if(m.m){ add('bub me', m.m); }
+      else {
+        add('bub ai', "<span class='bub-en'>"+m.a+"</span>"+(m.note?"<span class='note'>"+m.note+"</span>":""));
+        var acts = '<button class="bub-act bub-act-ic" onclick="sayEN(this)" aria-label="Ouvir">'+SPK+'</button>';
+        if(m.pt){ acts += '<button class="bub-act" onclick="togglePT(this)">'+TRN+'Traduzir</button>'; }
+        add('bub-actions', acts);
+        if(m.pt){ add('bub-pt', m.pt, true); }
       }
-      body.appendChild(el);
+      d += 0.08;
     });
+  }
+
+  function speakEN(text){
+    try { window.speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = 0.95; window.speechSynthesis.speak(u); } catch(e){}
+  }
+  function sayEN(btn){
+    var bub = btn.closest('.bub-actions').previousElementSibling;
+    var en = bub && bub.querySelector ? bub.querySelector('.bub-en') : null;
+    var t = (en ? en.textContent : (bub ? bub.textContent : '')).replace(/[\u{1F000}-\u{1FFFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}]/gu, '').trim();
+    if(t){ speakEN(t); }
+  }
+  function togglePT(btn){
+    var pt = btn.closest('.bub-actions').nextElementSibling;
+    if(pt && pt.classList && pt.classList.contains('bub-pt')){ pt.hidden = !pt.hidden; btn.classList.toggle('on'); }
   }
   document.getElementById('tabs').addEventListener('click', function(e){
     var b = e.target.closest('.mode-tab'); if(!b) return;
